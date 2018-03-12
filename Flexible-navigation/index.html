@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性导航</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        body {
+            background-color: pink;
+        }
+
+        #nav {
+            width: 900px;
+            height: 50px;
+            margin: 100px auto;
+            background: url("img/logo.png") no-repeat 800px 0 #fff;
+            background-size: 100px 50px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        #ul {
+            position: absolute;
+        }
+
+        #ul li {
+            width: 100px;
+            line-height: 55px;
+            float: left;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #mt {
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            background: url("img/mtr.png") no-repeat 10px;
+            background-size: 80px;
+        }
+    </style>
+</head>
+<body>
+<div id="nav">
+    <span id="mt"></span>
+    <ul id="ul">
+        <li>导航</li>
+        <li>导航</li>
+        <li>导航</li>
+        <li>导航</li>
+        <li>导航</li>
+        <li>导航</li>
+        <li>导航</li>
+        <li>导航</li>
+    </ul>
+</div>
+
+<script>
+    window.onload = function () {
+        //获取标签
+        var nav = document.getElementById('nav');
+        var mt = document.getElementById('mt');
+        var lis = document.getElementsByTagName('li');
+        //记录鼠标点击的位置
+        var beginX = 0;
+
+        //缓动动画
+        var begin = 0, end = 0;
+        setInterval(function () {
+            begin = begin + (end - begin) * 0.2;
+            mt.style.left = begin + 'px'
+        }, 10);
+
+        //遍历
+        for (var i = 0; i < lis.length; i++) {
+            var oli = lis[i];
+            //监听鼠标的进入
+            oli.onmouseover = function () {
+                end = this.offsetLeft;
+            };
+            //监听鼠标的按下
+            oli.onmousedown = function () {
+                beginX = this.offsetLeft;
+            };
+            //监听鼠标的离开
+            oli.onmouseout = function () {
+                end = beginX;
+            };
+        }
+    }
+</script>
+</body>
+</html>
